@@ -2,6 +2,8 @@ package com.xg.license;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,14 +41,38 @@ public class UserController {
     }
 
 
-    public static void main(String[] args) {
-        SimpleDateFormat sim = new SimpleDateFormat("yyyy-mm-dd");
-//        String s = new UserController().desCode(sim.format(new Date()));
-        String s = new UserController().desCode("2019-10-21");
-        System.out.println("加密"+s);
-        System.out.println("==================================================");
-        Boolean aBoolean = new UserController().desDecode(s);
-        System.out.println("解密"+aBoolean);
+//    public static void main(String[] args) {
+//        SimpleDateFormat sim = new SimpleDateFormat("yyyy-mm-dd");
+////        String s = new UserController().desCode(sim.format(new Date()));
+//        String s = new UserController().desCode("2019-10-21");
+//        System.out.println("加密"+s);
+//        System.out.println("==================================================");
+//        Boolean aBoolean = new UserController().desDecode(s);
+//        System.out.println("解密"+aBoolean);
+//    }
+
+
+    public static void main(String[] args)  {
+        BufferedReader in = null;
+        Process pr = null;
+        try {
+           String exUrl = "C:cc";
+           String commandStr = new String(
+                   "python C:/Users/1115393087/Desktop/qwe.py " + exUrl);
+           pr = Runtime.getRuntime().exec(commandStr);
+           in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+           String line = null;
+           String result = "";
+           while ((line = in.readLine()) != null) {
+               System.err.println(line);
+               result = line;
+           }
+           System.out.println(result);
+            pr.waitFor();
+            in.close();
+       } catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
 
